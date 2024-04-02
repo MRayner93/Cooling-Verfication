@@ -6,9 +6,9 @@ import json
 from datetime import datetime
 
 # Example
-api_key = "Hier_bitte_Ihren_API-KEY_einfügen"
-location = "26127,DE"
-datetime_str = "10.07.2023 13:00"
+api_key = "F5PA3TTVTMFF3D83AQJBAH3A3"
+location = "26188,DE"
+datetime_str = "01.04.2024 13:00"
 
 # Convert time to string
 datetime_obj = datetime.strptime(datetime_str, '%d.%m.%Y %H:%M')
