@@ -5,7 +5,7 @@ import requests
 import json
 from datetime import datetime
 
-# Exampl
+# Example
 api_key = "Hier_bitte_Ihren_API-KEY_einfügen"
 location = "26127,DE"
 datetime_str = "10.07.2023 13:00"
