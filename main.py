@@ -1,5 +1,5 @@
 """
-Author: Leon van Stevendaal & Merlin Rayner
+Author: Leon van Stevendaal & Merlin Rayner & Stefan Moormann & Leon Deupmann & Yannik Helms & Sebastian Klockgether
 Version: 1.0
 """
 import pyodbc
@@ -7,14 +7,14 @@ from datetime import datetime, timedelta
 import functions
 
 # Connection data
-server = '[YOUR SERVER IP HERE]'
-database = '[YOUR DATABASE NAME HERE]' 
-username = 'YOUR USERNAME HERE'
-password = 'YOUR PASSWORD HERE'
+server = 'sc-db-server.database.windows.net'
+database = 'supplychain' 
+username = 'rse'
+password = 'Pa$$w0rd'
 
 # Define connection string
 conn_str = (
-f'DRIVER={{YOUR DRIVER NAME HERE}};'
+f'DRIVER={{ODBC Driver 17 for SQL Server}};'
 f'SERVER={server};'
 f'DATABASE={database};'
 f'UID={username};'
