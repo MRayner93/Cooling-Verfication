@@ -44,8 +44,11 @@ while True:
         if id not in transport_id_list:
             transport_id_list.append(id)
     
+
     # User input for selecting the Transport ID
     while True:
+        for i, transport_id in enumerate(transport_id_list, start=1):
+            print(f"{i}. {transport_id}")
         entry = int(input("Which entry do you want to check? (1-" + str(len(transport_id_list)) + ") "))
         if 1 <= entry <= len(transport_id_list):
             transport_id = transport_id_list[entry-1]
@@ -55,7 +58,7 @@ while True:
     
     # Execute SQL query, sorted by the previously selected Transport ID
             
-    cursor.execute('SELECT * FROM v_coolchain WHERE transportid = ?', transport_id)
+    cursor.execute('SELECT * FROM v_coolchain WHERE transportid = ? ', transport_id)
     # Save results
     for row in cursor:
         all_data.append(row)
@@ -63,7 +66,7 @@ while True:
     # Close connection
     cursor.close()
     conn.close()
-    
+
     # Check for cold chain consistency
     consistency_result, consistency_error = functions.check_consistency(all_data)
     # Check time difference
