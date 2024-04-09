@@ -55,7 +55,7 @@ while True:
     
     # Execute SQL query, sorted by the previously selected Transport ID
             
-    cursor.execute('SELECT * FROM coolchain WHERE transportid = ?', transport_id)
+    cursor.execute('SELECT * FROM v_coolchain WHERE transportid = ?', transport_id)
     # Save results
     for row in cursor:
         all_data.append(row)
