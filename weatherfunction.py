@@ -7,7 +7,7 @@ from datetime import datetime
 
 # Example
 api_key = "F5PA3TTVTMFF3D83AQJBAH3A3"
-location = "26188,DE"
+location = "26133,DE"
 datetime_str = "12.07.2023 15:00"
 
 # Convert time to string
