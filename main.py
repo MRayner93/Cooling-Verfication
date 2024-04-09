@@ -1,5 +1,5 @@
 """
-Author: Leon van Stevendaal & Merlin Rayner
+Author: Leon van Stevendaal & Merlin Rayner & Stefan Moormann & Leon Deupmann & Yannik Helms & Sebastian Klockgether
 Version: 1.0
 """
 import pyodbc
