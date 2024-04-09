@@ -36,7 +36,7 @@ while True:
     transport_id_list=[]
     
     # Retrieve existing Transport IDs from the database
-    cursor.execute('SELECT transportid FROM coolchain')
+    cursor.execute('SELECT transportid FROM v_coolchain')
     for row in cursor:
         all_transport_id_list.append(row[0])
     
