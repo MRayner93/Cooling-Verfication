@@ -11,6 +11,7 @@ def check_consistency(matrix):
     for i in range(len(matrix) - 1):
         if matrix[i][-2] == "'in'" and matrix[i+1][-2] != "'out'":
             return False, "In does not follow Out"
+        
         if matrix[i][-2] == matrix[i+1][-2]:
             return False, f"Entry {i} and Entry {i+1} are both '{matrix[i][-2]}'"
         
