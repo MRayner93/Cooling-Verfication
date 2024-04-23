@@ -16,7 +16,7 @@ password = 'Pa$$w0rd'
 
 # Define connection string
 conn_str = (
-f'DRIVER={{ODBC Driver 18 for SQL Server}};'
+f'DRIVER={{ODBC Driver 17 for SQL Server}};'
 f'SERVER={server};'
 f'DATABASE={database};'
 f'UID={username};'
@@ -39,9 +39,15 @@ while True:
     transport_id_list=[]
     
     company_data= []
+
+    transportstation_id = []
+
+    transportstation_data = []
+
+
     
     # Retrieve existing Transport IDs from the database
-    cursor.execute('SELECT transportid FROM v_coolchain_crypt')
+    cursor.execute('SELECT transportid FROM coolchain')
     for row in cursor:
         all_transport_id_list.append(row[0])
     
@@ -63,22 +69,31 @@ while True:
     
     # Execute SQL query, sorted by the previously selected Transport ID
             
-    cursor.execute('SELECT * FROM v_coolchain WHERE transportid = ? ORDER BY datetime', transport_id )
+    cursor.execute('SELECT * FROM coolchain WHERE transportid = ? ORDER BY datetime', transport_id )
     # Save results
     for row in cursor:
         all_data.append(row)
-    # Close connection
-    
-    
+
+    for j in range(len(all_data)-1):
+        if all_data[j][-3] not in transportstation_id:
+            transportstation_id.append(all_data[j][-3])
+    for k in transportstation_id:
+        cursor.execute('SELECT * FROM transportstation_crypt WHERE transportstationID =?',k)
+        for data in cursor.fetchall():
+            transportstation_data.append(data)
+
+
     cursor.execute('SELECT * FROM company_crypt ')
     for data in cursor:
         company_data.append(data) 
-           
+
+    
     cursor.close()
     conn.close()
     
+    decrypted_transportstation_data = decryptfucntion.decryption_transportstation(transportstation_data)
     # Transfer encrypted company data to decryptfunction
-    decrypted_company_data = decryptfucntion.decryption(company_data)
+    decrypted_company_data = decryptfucntion.decryption_company(company_data)
     # Check the weather in case of time differenz problems
     temperature_during_day =weatherfunction.check_weather(decrypted_company_data)
     # Check for cold chain consistency
