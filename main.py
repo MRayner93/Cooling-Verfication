@@ -5,7 +5,7 @@ Version: 1.0
 
 import pyodbc
 from datetime import datetime, timedelta
-import functions, decryptfucntion,weatherfunction
+import functions, decryptfucntion, weatherfunction, test
 
 
 # Connection data
@@ -16,7 +16,7 @@ password = 'Pa$$w0rd'
 
 # Define connection string
 conn_str = (
-f'DRIVER={{ODBC Driver 17 for SQL Server}};'
+f'DRIVER={{ODBC Driver 18 for SQL Server}};'
 f'SERVER={server};'
 f'DATABASE={database};'
 f'UID={username};'
@@ -38,7 +38,7 @@ while True:
     
     transport_id_list=[]
     
-    company_data= []
+    company_id= []
 
     transportstation_id = []
 
@@ -76,33 +76,24 @@ while True:
 
     for j in range(len(all_data)-1):
         if all_data[j][-3] not in transportstation_id:
-            transportstation_id.append(all_data[j][-3])
-    for k in transportstation_id:
-        cursor.execute('SELECT * FROM transportstation_crypt WHERE transportstationID =?',k)
-        for data in cursor.fetchall():
-            transportstation_data.append(data)
+            transportstation_id.append(all_data[j][-3]) 
 
-
-    cursor.execute('SELECT * FROM company_crypt ')
-    for data in cursor:
-        company_data.append(data) 
-
+    company_id = all_data[0][1]
     
     cursor.close()
     conn.close()
     
-    decrypted_transportstation_data = decryptfucntion.decryption_transportstation(transportstation_data)
+    encrypted_transportstation = decryptfucntion.decryption_transportstation(transportstation_id)
     # Transfer encrypted company data to decryptfunction
-    decrypted_company_data = decryptfucntion.decryption_company(company_data)
-    # Check the weather in case of time differenz problems
-    temperature_during_day =weatherfunction.check_weather(decrypted_company_data)
+    decrypted_company_data = decryptfucntion.decryption_company(company_id)  
     # Check for cold chain consistency
     consistency_result, consistency_error = functions.check_consistency(all_data)
     # Check time difference
-    time_difference_result, time_difference_error = functions.check_time_difference(all_data)
+    time_difference_result, time_difference_error, time_difference_error_timestamp = functions.check_time_difference(all_data)
     # Check transport duration
     transport_duration_result = functions.check_transport_duration(all_data)
-    
+    # Check the weather in case of time differenz problems
+    temperature_during_day =weatherfunction.check_weather(encrypted_transportstation, time_difference_error_timestamp)
    
     if consistency_result and time_difference_result and transport_duration_result:
         print("The ID", transport_id, "is \033[1;32;4mcorrect\033[0m.")
@@ -112,8 +103,10 @@ while True:
         if not consistency_result:
             print(f"\033[1;31;4mWarning:\033[0m The cold chain has consistency errors: {consistency_error}")
         if not time_difference_result:
+            
             print(f"\033[1;31;4mWarning:\033[0m {time_difference_error}")
             print("The temperatur during the day was", temperature_during_day)
+            
         if not transport_duration_result:
             print("\033[1;31;4mWarning:\033[0m The transport duration exceeded 48 hours.")
             

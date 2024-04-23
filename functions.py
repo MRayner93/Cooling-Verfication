@@ -2,9 +2,7 @@
 Author: Leon van Stevendaal & Merlin Rayner
 Version: 1.0
 """
-from datetime import timedelta, datetime
-import requests
-import json
+from datetime import timedelta
 
 # Function to check consistency = (Follows In after Out and Is the first entry an In)
 def check_consistency(matrix):
@@ -33,7 +31,7 @@ def check_time_difference(matrix):
             time_in = matrix[i+1][-1]
             time_difference = time_in - time_out
             if time_difference > timedelta(minutes=10):
-                return False, "The time difference between 'out' and 'in' is more than 10 minutes."
+                return False, "The time difference between 'out' and 'in' is more than 10 minutes.", time_out 
     return True, ""
 
 # Function to check if the transport duration of 48 hours has been adhered to
