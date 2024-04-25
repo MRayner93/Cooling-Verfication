@@ -6,8 +6,11 @@ import json
 from datetime import datetime
 
  
-def check_weather(encrypted_transportstation_data , timestamp):
-    post_code = encrypted_transportstation_data[3]
+def check_weather(encrypted_transportstation_data):
+    for row in encrypted_transportstation_data:
+        for item in row:
+        
+            timestamp = encrypted_transportstation_data[4]
 # Example
     api_key = "F5PA3TTVTMFF3D83AQJBAH3A3"
     location = post_code,"DE"

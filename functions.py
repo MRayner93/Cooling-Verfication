@@ -31,7 +31,7 @@ def check_time_difference(matrix):
             time_in = matrix[i+1][-1]
             time_difference = time_in - time_out
             if time_difference > timedelta(minutes=10):
-                return False, "The time difference between 'out' and 'in' is more than 10 minutes.", time_out 
+                return False, f"The time difference between ({time_in}) and ({time_out}) is more than 10 minutes" 
     return True, ""
 
 # Function to check if the transport duration of 48 hours has been adhered to
@@ -42,3 +42,15 @@ def check_transport_duration(matrix):
     if total_transport_duration > timedelta(hours=48):
         return False
     return True
+
+
+def check_temp_data(temp_data, transportstation_id):
+    for row in temp_data:
+        if row[0] in transportstation_id:
+            if not 2 <= row[-1] <= 4:
+                temperature = row[-1]
+                date = row[-2]
+                return False, f"The temperature ({temperature}) on date {date} for transport station ID {row[0]} is not within the acceptable range of 2 to 4.",row[0]
+    return True           
+
+
