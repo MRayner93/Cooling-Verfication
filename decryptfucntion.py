@@ -21,10 +21,7 @@ iv = b'passwort-salzen!'  # 16 Byte Initialisierungsvektor
 
 cipher_company = AES.new(key, AES.MODE_CBC, iv)
 cipher_transportstation = AES.new(key, AES.MODE_CBC, iv)
-cipher_temp = AES.new(key, AES.MODE_CBC, iv)
 
-def decrypt_value_temp(encrypted_data):
-    return unpad(cipher_temp.decrypt(encrypted_data),AES.block_size).decode()
 
 def decrypt_value_company(encrypted_data):
     return unpad(cipher_company.decrypt(encrypted_data), AES.block_size).decode()
@@ -99,16 +96,7 @@ def decryption_transportstation(transportstation_id):
     #return decrypted_temp_data    
             
 
-def decryption_transportstationID_temp(temp_error_id):
-    conn = pyodbc.connect(conn_str)
-    cursor = conn.cursor()
-    cursor.execute('SELECT transportstation FROM v_tempdata_crypt WHERE transportstationID =?',(temp_error_id))
-    encrypted_transportstation = cursor.fetchone()
-    decrypted_transportstation_temp = decrypt_value_transportstation(encrypted_transportstation[0])
-    cursor.close()
-    conn.close()
 
-    return decrypted_transportstation_temp
 
 
 

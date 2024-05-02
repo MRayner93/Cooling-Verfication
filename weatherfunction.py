@@ -6,23 +6,22 @@ import json
 from datetime import datetime
 
  
-def check_weather(encrypted_transportstation_data):
-    for row in encrypted_transportstation_data:
-        for item in row:
-        
-            timestamp = encrypted_transportstation_data[4]
+def check_weather(weatherdata_list, time_out):
+    
+    weatherdata = weatherdata_list[0]
 # Example
     api_key = "F5PA3TTVTMFF3D83AQJBAH3A3"
-    location = post_code,"DE"
-    datetime = timestamp
-
+    location = weatherdata[1],"DE"
+    datetime_str = time_out.strftime('%Y-%m-%dT%H:%M:%S')
+    hour = time_out.hour
 # Convert time to string
     
 # Visual Crossing Weather 
-    url ='https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/{location}/{timestamp}'.format(location=location, timestamp=datetime)
+    url ='https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/{location}/{timestamp}'.format(location=location, timestamp=datetime_str)
     response = requests.get(url, params={'unitGroup': 'metric','key':
     api_key,'include': 'hours'})
     data = response.json()
-    temperature = data["days"][0]["temp"]
+
+    temperature = data["datetime"][hour]["temp"]
     
     return(temperature)
