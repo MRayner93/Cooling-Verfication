@@ -5,7 +5,7 @@ Version: 1.0
 
 import pyodbc
 from datetime import datetime, timedelta
-import functions, decryptfunction, weatherfunction
+import databasefunctions, decryptfunction, weatherfunction
 
 
 # Connection data
@@ -88,21 +88,21 @@ while True:
     cursor.close()
     conn.close()
     
-    check_temp_data_result, check_temp_error,temp_error_id = functions.check_temp_data(temp_data, transportstation_id)
+    check_temp_data_result, check_temp_error,temp_error_id = databasefunctions.check_temp_data(temp_data, transportstation_id)
     
     encrypted_transportstation = decryptfunction.decryption_transportstation(transportstation_id)
     # Transfer encrypted company data to decryptfunction
     decrypted_company_data = decryptfunction.decryption_company(company_id)  
     # Check for cold chain consistency
-    consistency_result, consistency_error = functions.check_consistency(all_data)
+    consistency_result, consistency_error = databasefunctions.check_consistency(all_data)
     # Check time difference
-    time_difference_result, time_difference_error, time_out, time_difference_id = functions.check_time_difference(all_data)
+    time_difference_result, time_difference_error, time_out, time_difference_id = databasefunctions.check_time_difference(all_data)
     # Check transport duration
-    transport_duration_result = functions.check_transport_duration(all_data)
+    transport_duration_result = databasefunctions.check_transport_duration(all_data)
     # Creating List for
 
     if time_difference_result == False:
-        weather_data_list = functions.weatherfunction_list(encrypted_transportstation, time_difference_id )
+        weather_data_list = databasefunctions.weatherfunction_list(encrypted_transportstation, time_difference_id )
     # Check the weather in case of time differenz problems
         temperature_during_day =weatherfunction.check_weather(weather_data_list, time_out)
    
