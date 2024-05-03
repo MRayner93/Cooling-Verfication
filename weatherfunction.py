@@ -1,6 +1,3 @@
-"""
-THIS FILE IS TO TEST WEATHER DATA ONLY. THIS FUNCTION WILL BE IMPLEMENTED IN THE FUNCTIONS.PY LATER!
-"""
 import requests
 import json
 from datetime import datetime

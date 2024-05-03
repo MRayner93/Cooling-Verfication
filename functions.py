@@ -1,7 +1,3 @@
-"""
-Author: Leon van Stevendaal & Merlin Rayner
-Version: 1.0
-"""
 from datetime import timedelta
 
 # Function to check consistency = (Follows In after Out and Is the first entry an In)
