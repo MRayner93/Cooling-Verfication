@@ -119,6 +119,7 @@ while True:
 
         if not check_temp_data_result:
             print(f"The temperature check has failed : {check_temp_error} ")
+            print("The temperatur during the transport was",temperature_during_day,"celcius")
                 
             
         if not transport_duration_result:

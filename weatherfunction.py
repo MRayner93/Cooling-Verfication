@@ -18,10 +18,10 @@ def check_weather(weatherdata_list, time_out):
     
 # Visual Crossing Weather 
     url ='https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/{location}/{timestamp}'.format(location=location, timestamp=datetime_str)
-    response = requests.get(url, params={'unitGroup': 'metric','key':
-    api_key,'include': 'hours'})
+    response = requests.get(url, params={'unitGroup': 'metric','key':api_key,'include': 'hours'})
+    print(response)
     data = response.json()
-
-    temperature = data["datetime"][hour]["temp"]
-    
+    json_str = json.dumps(data, indent=4)
+    json_str = json.loads(json_str)
+    temperature = json_str['days'][0]['hours'][hour]['temp']
     return(temperature)
