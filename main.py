@@ -115,11 +115,11 @@ while True:
             print(f"\033[1;31;4mWarning:\033[0m The cold chain has consistency errors: {consistency_error}")
         if not time_difference_result:
             print(f"\033[1;31;4mWarning:\033[0m {time_difference_error}")
-            print(time_out)
+            print("The temperatur during the transport was",temperature_during_day,"celcius")
 
         if not check_temp_data_result:
             print(f"The temperature check has failed : {check_temp_error} ")
-            print("The temperatur during the transport was",temperature_during_day,"celcius")
+            
                 
             
         if not transport_duration_result:
