@@ -2,16 +2,14 @@ import requests
 import json
 from datetime import datetime
 
- 
 def check_weather(weatherdata_list, time_out):
     
     weatherdata = weatherdata_list[0]
-# Example
+# API-key and weatherdata acquistion
     api_key = "F5PA3TTVTMFF3D83AQJBAH3A3"
     location = weatherdata[1],"DE"
     datetime_str = time_out.strftime('%Y-%m-%dT%H:%M:%S')
     hour = time_out.hour
-# Convert time to string
     
 # Visual Crossing Weather 
     url ='https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/{location}/{timestamp}'.format(location=location, timestamp=datetime_str)

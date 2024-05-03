@@ -6,7 +6,6 @@ import pyodbc
 from datetime import datetime, timedelta
 import databasefunctions, decryptfunction, weatherfunction
 
-
 # Connection data
 server = 'sc-db-server.database.windows.net'
 database = 'supplychain' 
@@ -21,7 +20,6 @@ f'DATABASE={database};'
 f'UID={username};'
 f'PWD={password}'
 )
-
 
 while True:
     # Establish connection
@@ -60,8 +58,7 @@ while True:
         else:
             print("Invalid input. Please choose a number between 1 and", len(transport_id_list))
     
-    # Execute SQL query, sorted by the previously selected Transport ID
-            
+    # Execute SQL query, sorted by the previously selected Transport ID       
     cursor.execute('SELECT * FROM coolchain WHERE transportid = ? ORDER BY datetime', transport_id )
     # Save results
     for row in cursor:
@@ -117,5 +114,4 @@ while True:
         if not transport_duration_result:
             print("\033[1;31;4mWarning:\033[0m The transport duration exceeded 48 hours.")
 
-   
     break  
