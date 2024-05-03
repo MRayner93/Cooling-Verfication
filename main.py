@@ -94,7 +94,6 @@ while True:
         weather_data_list = databasefunctions.weatherfunction_list(encrypted_transportstation, time_difference_id )
     # Check the weather in case of time differenz problems
         temperature_during_day =weatherfunction.check_weather(weather_data_list, time_out)
-   
     if consistency_result and time_difference_result and transport_duration_result and check_temp_data_result:
         print("The ID", transport_id, "is \033[1;32;4mcorrect\033[0m.")
     else:
@@ -105,13 +104,8 @@ while True:
         if not time_difference_result:
             print(f"\033[1;31;4mWarning:\033[0m {time_difference_error}")
             print("The temperatur during the transport was",temperature_during_day,"celcius")
-
         if not check_temp_data_result:
-            print(f"The temperature check has failed : {check_temp_error} ")
-            
-                
-            
+            print(f"The temperature check has failed : {check_temp_error} ")                
         if not transport_duration_result:
             print("\033[1;31;4mWarning:\033[0m The transport duration exceeded 48 hours.")
-
     break  
