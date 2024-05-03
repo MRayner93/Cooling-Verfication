@@ -5,7 +5,7 @@ Version: 1.0
 
 import pyodbc
 from datetime import datetime, timedelta
-import functions, decryptfucntion, weatherfunction
+import functions, decryptfunction, weatherfunction
 
 
 # Connection data
@@ -90,9 +90,9 @@ while True:
     
     check_temp_data_result, check_temp_error,temp_error_id = functions.check_temp_data(temp_data, transportstation_id)
     
-    encrypted_transportstation = decryptfucntion.decryption_transportstation(transportstation_id)
+    encrypted_transportstation = decryptfunction.decryption_transportstation(transportstation_id)
     # Transfer encrypted company data to decryptfunction
-    decrypted_company_data = decryptfucntion.decryption_company(company_id)  
+    decrypted_company_data = decryptfunction.decryption_company(company_id)  
     # Check for cold chain consistency
     consistency_result, consistency_error = functions.check_consistency(all_data)
     # Check time difference
