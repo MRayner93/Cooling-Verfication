@@ -1,8 +1,7 @@
 """
 Author: Leon van Stevendaal & Merlin Rayner & Stefan Moormann & Leon Deupmann & Yannik Helms & Sebastian Klockgether
-Version: 1.0
+Version: 4.2
 """
-
 import pyodbc
 from datetime import datetime, timedelta
 import databasefunctions, decryptfunction, weatherfunction
@@ -32,21 +31,14 @@ while True:
     
     
     # Initialize matrix for data
-    all_data = []
-    
-    all_transport_id_list = []
-    
-    transport_id_list=[]
-    
+    all_data = []   
+    all_transport_id_list = []  
+    transport_id_list=[] 
     company_id= []
-
     transportstation_id = []
-
     transportstation_data = []
-
     temp_data = []
 
-    
     # Retrieve existing Transport IDs from the database
     cursor.execute('SELECT transportid FROM coolchain')
     for row in cursor:
