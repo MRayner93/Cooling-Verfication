@@ -1,9 +1,8 @@
 """
 Author: Leon van Stevendaal & Merlin Rayner & Stefan Moormann & Leon Deupmann & Yannik Helms & Sebastian Klockgether
-Version: 4.2
+Version: 4.5
 """
 import pyodbc
-from datetime import datetime, timedelta
 import databasefunctions, decryptfunction, weatherfunction
 
 # Connection data
@@ -14,7 +13,7 @@ password = 'Pa$$w0rd'
 
 # Define connection string
 conn_str = (
-f'DRIVER={{ODBC Driver 17 for SQL Server}};'
+f'DRIVER={{SQL Server}};'
 f'SERVER={server};'
 f'DATABASE={database};'
 f'UID={username};'
@@ -41,7 +40,6 @@ while True:
     cursor.execute('SELECT transportid FROM coolchain')
     for row in cursor:
         all_transport_id_list.append(row[0])
-    
     for id in all_transport_id_list:
         if id not in transport_id_list:
             transport_id_list.append(id)
@@ -63,37 +61,42 @@ while True:
     # Save results
     for row in cursor:
         all_data.append(row)
-
+ 
+    # How many transport station IDs do we have?
     for j in range(len(all_data)-1):
         if all_data[j][-3] not in transportstation_id:
             transportstation_id.append(all_data[j][-3]) 
+    
+    # Placeholder for further functionality (KEEP AS IS)
+    #company_id = all_data[0][1]
 
-    company_id = all_data[0][1]
-
+    # Write all temperature data into temp_data
     cursor.execute('SELECT transportstationID, transportstation, datetime, temperature FROM v_tempdata')
     for row in cursor:
         temp_data.append(row)
 
+   # Close connection and cursor
     cursor.close()
     conn.close()
     
+    # Temperature check for the refrigeration units
     check_temp_data_result, check_temp_error,temp_error_id = databasefunctions.check_temp_data(temp_data, transportstation_id)
-    
+    # Decrypting transport stations
     encrypted_transportstation = decryptfunction.decryption_transportstation(transportstation_id)
     # Transfer encrypted company data to decryptfunction
-    decrypted_company_data = decryptfunction.decryption_company(company_id)  
+    encrypted_company_data = decryptfunction.decryption_company(company_id)  
     # Check for cold chain consistency
     consistency_result, consistency_error = databasefunctions.check_consistency(all_data)
     # Check time difference
     time_difference_result, time_difference_error, time_out, time_difference_id = databasefunctions.check_time_difference(all_data)
     # Check transport duration
     transport_duration_result = databasefunctions.check_transport_duration(all_data)
-    # Creating List for
-
+    
+    # If the time is not right, then check the weather
     if time_difference_result == False:
         weather_data_list = databasefunctions.weatherfunction_list(encrypted_transportstation, time_difference_id )
     # Check the weather in case of time differenz problems
-        temperature_during_day =weatherfunction.check_weather(weather_data_list, time_out)
+        temperature_during_day = weatherfunction.check_weather(weather_data_list, time_out)
     if consistency_result and time_difference_result and transport_duration_result and check_temp_data_result:
         print("The ID", transport_id, "is \033[1;32;4mcorrect\033[0m.")
     else:

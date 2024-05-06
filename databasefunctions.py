@@ -34,7 +34,7 @@ def check_transport_duration(matrix):
         return False
     return True
 
-
+# Function checks if the temperature is between 2 and 4 degrees Celsius
 def check_temp_data(temp_data, transportstation_id):
     for row in temp_data:
         if row[0] in transportstation_id:
@@ -44,6 +44,7 @@ def check_temp_data(temp_data, transportstation_id):
                 return False, f"The temperature ({temperature}) on date {date} for transport station ID {row[0]}, ({row[1]}) is not within the acceptable range of 2 to 4.",row[0]
     return True, "",""          
 
+# Function to check whether the entries are postal codes or not
 def weatherfunction_list(encrypted_transportstation, time_difference_id):
     weather_data_list = []
     for row in encrypted_transportstation:
