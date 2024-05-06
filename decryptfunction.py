@@ -62,7 +62,6 @@ def decryption_transportstation(transportstation_id):
 # Perform decryption for each record and output
     for row in cursor.fetchall():
         id, encrypted_transportstation, encrypted_category, encrypted_plz = row
-# Since the data is stored as binary, no conversion to str() should be done here
         test_id = row[0]
         decrypted_list = []
         decrypted_list.append(row[0])
