@@ -7,8 +7,8 @@ from datetime import datetime
 
 # Example
 api_key = "F5PA3TTVTMFF3D83AQJBAH3A3"
-location = "26133,DE"
-datetime_str = "12.07.2023 15:00"
+location = "26188,DE"
+datetime_str = "05.04.2024 22:00"
 
 # Convert time to string
 datetime_obj = datetime.strptime(datetime_str, '%d.%m.%Y %H:%M')
