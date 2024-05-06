@@ -1,6 +1,6 @@
 """
 Author: Leon van Stevendaal & Merlin Rayner & Stefan Moormann & Leon Deupmann & Yannik Helms & Sebastian Klockgether
-Version: 4.5
+Version: 1.0
 """
 import pyodbc
 import databasefunctions, decryptfunction, weatherfunction
