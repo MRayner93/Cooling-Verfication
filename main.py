@@ -26,7 +26,6 @@ while True:
     # Create cursor
     cursor = conn.cursor()
     
-    
     # Initialize matrix for data
     all_data = []   
     all_transport_id_list = []  
@@ -44,7 +43,6 @@ while True:
         if id not in transport_id_list:
             transport_id_list.append(id)
     
-
     # User input for selecting the Transport ID
     while True:
         for i, transport_id in enumerate(transport_id_list, start=1):

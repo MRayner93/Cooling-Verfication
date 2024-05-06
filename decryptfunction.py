@@ -79,23 +79,3 @@ def decryption_transportstation(transportstation_id):
     conn.close()
 
     return decryped_id_list
-            
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

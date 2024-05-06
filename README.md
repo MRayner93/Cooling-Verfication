@@ -20,10 +20,11 @@ This Python program is a comprehensive solution for monitoring and verifying col
 
 ## Usage
 
-    Install ODBC Driver on your Windows Computer (https://learn.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server?view=sql-server-ver16)
-     OR: Install ODBC Driver on your Linux Computer(https://learn.microsoft.com/de-de/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server?view=sql-server-ver16&tabs=debian18-install%2Calpine17-install%2Cdebian8-install%2Credhat7-13-install%2Crhel7-offline)
-    Change the connection data in the main.py
-    Run the program    
+   1. Install ODBC Driver on your Windows Computer (https://learn.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server?view=sql-server-ver16)
+    1.1 OR: Install ODBC Driver on your Linux Computer(https://learn.microsoft.com/de-de/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server?view=sql-server-ver16&tabs=debian18-install%2Calpine17-install%2Cdebian8-install%2Credhat7-13-install%2Crhel7-offline)
+   2. Change the connection data and ODBC Driver in the main.py
+   3. Install cryptodome with pip install
+   4. Run the program   
 
 ## License
 
